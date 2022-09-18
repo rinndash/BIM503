@@ -1,0 +1,73 @@
+---
+title: "BIM503 Homework1"
+author: "PMBA 9 20214044 윤진서"
+output: 
+  pdf_document:
+    extra_dependencies: ["kotex"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## BIM503 Homework 1
+
+분석에 사용할 데이터를 `email.df` 변수로 불러오고 구조를 확인합니다.
+
+```{r}
+email.df = read.csv("res/L2_email_campaign.csv")
+str(email.df)
+```
+
+### Question 1.
+
+```{r}
+summary(email.df$age)
+```
+
+# Question 2.
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+
+ggplot(email.df, aes(x=age)) + 
+  geom_histogram(fill="steelblue", binwidth=1) + 
+  xlab("Age") + 
+  ggtitle("Histogrom for Age") + 
+  theme_bw()
+```
+
+### Question 3.
+
+```{r}
+t.test(email.df$age, mu=40, alternative = "less")
+```
+
+P-value가 0에 가까우므로 귀무 가설을 기각하고 대립가설을 채택할 수 있다. 다시 말해, 응답자의 평균 나이가 40세 이하라는 주장은 통계적으로 유의하다.
+
+### Question 4
+
+```{r}
+adressTypeTable = table(email.df$addresstype)
+round(prop.table(adressTypeTable), 3)
+```
+
+### Question 5
+
+```{r}
+binom.test(373, 1000, 0.36, alternative = "less")
+```
+
+P-Value가 0.8133로 귀무가설을 기각할 수 없으므로, 지방(rural) 인구 비율이 36% 이하일 것이라는 대립가설은 통계적으로 유의하지 않다.
+
+### Question 6
+
+```{r}
+respondByAddress = aggregate(
+  respond ~ addresstype, 
+  data = email.df,
+  function(x) { round(mean(x), 3) }
+)
+respondByAddress
+```
