@@ -1,0 +1,65 @@
+---
+title: "BIM503 Homework2"
+author: "PMBA 9 20214044 윤진서"
+output: 
+  pdf_document:
+    extra_dependencies: ["kotex"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## BIM503 Homework 2
+
+분석에 사용할 데이터를 `banking.df` 변수로 불러오고 구조를 확인합니다.
+
+```{r}
+banking.df = read.csv("res/L5_banking.csv")
+
+str(banking.df)
+head(banking.df, 10)
+```
+
+### Question 1.
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+
+summary(banking.df$profit)
+ggplot(banking.df, aes(x=profit)) + geom_histogram(fill="steelblue", bins = 30) + xlab("Profit") + ggtitle("Histogrom for Profit") + theme_bw()
+```
+`profit`의 중앙값이 9\$로 50% 고객에서 발생하는 이익이 9\$ 이하인데 반해, 평균 이익은 111.5\$인 것을 보면, 많은 고객으로부터 적은 이익만을 거두고 있고, 소수에 해당하는 일부 고객이 은행에 큰 이익을 주며 평균 이익을 끌어올리고 있는 상황으로 해석할 수 있다.
+
+# Question 2.
+
+```{r}
+mean(banking.df$online)
+```
+
+약 12.18%의 고객이 온라인 뱅킹을 사용하고 있다.
+
+### Question 3.
+
+```{r}
+
+```
+
+### Question 4
+
+```{r}
+
+```
+
+### Question 5
+
+```{r}
+
+```
+
+### Question 6
+
+```{r}
+
+```
